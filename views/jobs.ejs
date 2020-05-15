@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston Software Jobs</title>
+</head>
+<body>
+    <h1>List of Current Companies</h1>
+    
+   <h2>This is where you will display list of each company name eventually.</h2> 
+    <% all_companies.forEach( (single_company) => {  %>
+        <%= single_company.company_id %>  ,  <%= single_company.name %> , <%= single_company.description %> , <%= single_company.logo %>
+        <br>
+        <br>
+    <% }) %>
+    <br><br>
+
+    <h2>Add a New Company</h2>
+    <form action="/add" method="POST">
+        <label for="company_id">Company ID: </label>
+        <input type="number" name='company_id' id='company_id' required>
+        <br><br>
+        <label for="name">Name: </label>
+        <input type="text" name='name' id='name' required>
+        <br><br>
+        <label for="description">Description: </label>
+        <input type="text" name='description' id='description' required>
+        <br><br>
+        <label for="logo">Logo URL: </label>
+        <input type="text" name='logo' id='logo' required>
+        <br><br>
+        <input type="submit" value="Add Company">
+    </form>
+
+</body>
+</html>
