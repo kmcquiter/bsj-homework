@@ -10,7 +10,7 @@
     
    <h2>This is where you will display list of each company name eventually.</h2> 
     <% all_companies.forEach( (single_company) => {  %>
-        <%= single_company.company_id %>  ,  <%= single_company.name %> , <%= single_company.description %> , <%= single_company.logo %>
+        <a href= "/view/<%= single_company.company_id %> "> <%= single_company.company_id %></a>
         <br>
         <br>
     <% }) %>

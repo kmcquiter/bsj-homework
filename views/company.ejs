@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%= single_company.name %>
+    <br>
+    <br>
+    <%= single_company.description %>
+    <br>
+    <br>
+    <img src ="<%= single_company.logo %>" height="300" width="300">
+    <br>
+    <br>
+    <a href="/updateCompany/<%=single_company.company_id %>"> Company is Hiring!</a>
+    <br><br>
+    <a href="/delete/<%= single_company.company_id %>">Delete Company </a>
+</body>
+</html>

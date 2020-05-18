@@ -56,8 +56,54 @@ app.get('/jobs', (req, res) => {
             });
         }
     });
+});
     
+   app.get('/view/:company_id' , (req, res) => {
+       const parameters = req.params;
+       const company_id = parameters['company_id'];
+
+       db_handler.collection(COLLECTION_NAME).find({ company_id: company_id }).toArray((err, result) => {
+
+        if(err){
+            res.send("Company not found");
+            console.log(err);
+        } else {
+            res.render('company', {
+                'single_company': result[0]
+            });
+        }
+    });
    
+});
+
+app.get('/updateCompany/:company_id', (req,res) => {
+    const parameters = req.params;
+    const company_id = parameters['company_id'];
+
+    const new_hiring = { $set: {hiring: 'Yes'}};
+    db_handler.collection(COLLECTION_NAME).updateOne({ company_id: company_id}, new_hiring, (err, result) => {
+        if (err) {
+            res.send("Could not update hiring");
+            console.log(err);
+        }
+        else {
+            res.redirect('/view/' + company_id);
+        }
+    });
+
+});
+
+app.get('/delete/:company_id', (req, res) => {
+    const parameters = req.params;
+    const company_id = parameters['company_id'];
+    db_handler.collection(COLLECTION_NAME).deleteOne({company_id: company_id}, (err, result) => {
+        if (err) {
+            res.send("Could not delete the company");
+            console.log(err);
+        } else {
+            res.redirect('/jobs');
+        }
+    });
 });
 
 app.post('/add', (req, res) => {
@@ -72,9 +118,8 @@ app.post('/add', (req, res) => {
     const logo = form_data['logo'];
 
     const my_obj = {
-
-        company_id: company_id,
         name: name,
+        company_id: company_id,
         description: description,
         logo: logo
     }
@@ -90,6 +135,6 @@ app.post('/add', (req, res) => {
 
             res.redirect('/jobs');
         }
-    })
+    });
 
 });
